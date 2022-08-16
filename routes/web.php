@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,8 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/foods',[FoodController::class, 'getAllFoods'])
+->name('allFoods');
+
+Route::get('/add-foods',[FoodController::class, 'getAddFoodForm'])
+->name('addFood');
+
+Route::post('/addFoods',[FoodController::class, 'addFood'])->name('addFoodAction');
+
+Route::get('/request', [TestController::class, 'requestObject']);
+
 Route::get('/welcome', [TestController::class, 'displayUsername'] )
 ->name('welcome');
+
+Route::get('/vote', [TestController::class, 'vote'] )
+->middleware(['verifyAge'])
+->name('vote');
 
 // Route::get('/orderfood',[TestController::class, 'showOrderFood']);
 Route::get('/orderfood/{age}',[TestController::class, 'showOrderFood']);
