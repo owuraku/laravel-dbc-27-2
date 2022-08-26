@@ -25,6 +25,15 @@ Route::get('/foods',[FoodController::class, 'getAllFoods'])
 Route::get('/add-foods',[FoodController::class, 'getAddFoodForm'])
 ->name('addFood');
 
+Route::delete('/foods/{id}',[FoodController::class, 'deleteFood'])
+->name('deleteFood');
+
+Route::get('/foods/edit/{food}',[FoodController::class, 'getEditFoodForm'])
+->name('editFood');
+
+Route::put('/foods/edit',[FoodController::class, 'updateFood'])
+->name('editFoodAction');
+
 Route::post('/addFoods',[FoodController::class, 'addFood'])->name('addFoodAction');
 
 Route::get('/request', [TestController::class, 'requestObject']);
@@ -44,3 +53,5 @@ Route::get('/orderfood/{food}/{size}', function ($food, $size){
     // return "Order placed for ".$food. ". Size is ". $size;
 
 });
+
+require __DIR__.'/auth.php';
